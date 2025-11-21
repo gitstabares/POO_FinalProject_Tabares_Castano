@@ -6,6 +6,7 @@ public class Customer {
     private String name;
     private int id;
     private ArrayList<Videogame> gameLibrary;
+    private ArrayList<Sale> sales;
 
     // Constructor
 
@@ -29,9 +30,17 @@ public class Customer {
         return gameLibrary;
     }
 
+    public ArrayList<Sale> getSales() {
+        return sales;
+    }
+
     //Method to add games purchased to the customer's library
 
     public void addGame(ArrayList<Videogame> game) {
         gameLibrary.addAll(game);
+    }
+
+    public void addSale(Sale sale) {
+        sales.add(sale);
     }
 }
