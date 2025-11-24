@@ -18,7 +18,7 @@ public record Theme() {
      * @param path - Path of the font file (.ttf or .otf)
      * @return Font object loaded from the specified path, or null if loading fails
     */
-    private static final Font getFont(String path) {
+    public static final Font getFont(String path) {
         InputStream is = ClassLoader.getSystemResourceAsStream(path);
         try {
             return Font.createFont(Font.TRUETYPE_FONT, is);

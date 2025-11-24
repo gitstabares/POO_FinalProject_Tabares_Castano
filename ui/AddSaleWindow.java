@@ -32,21 +32,16 @@ public class AddSaleWindow extends JPanel {
 	}
 
 	private void initComponents() {
-		// Theme colors
-		Color bg = new Color(34,34,34);
-		Color panelBg = new Color(36,36,40);
-		Color textColor = Color.WHITE;
-		Color btnBg = new Color(60,63,65);
 
 		setLayout(new BorderLayout(8,8));
-		setBackground(bg);
+		setBackground(Theme.BACKGROUND_COLOR);
 		setBorder(BorderFactory.createEmptyBorder(8,8,8,8));
 
 		// Top search
 		JPanel top = new JPanel(new BorderLayout(6,6));
-		top.setBackground(bg);
+		top.setBackground(Theme.BACKGROUND_COLOR);
 		JLabel lbl = new JLabel("Buscar videojuego por título:");
-		lbl.setForeground(textColor);
+		lbl.setForeground(Theme.TEXTFIELD_TEXT_COLOR);
 		txtSearch = new JTextField();
 		txtSearch.setBorder(BorderFactory.createEmptyBorder(6,6,6,6));
 		top.add(lbl, BorderLayout.WEST);
@@ -54,12 +49,12 @@ public class AddSaleWindow extends JPanel {
 
 		// Center: inventory list (left) and cart (right)
 		JPanel center = new JPanel(new GridLayout(1,2,8,8));
-		center.setBackground(bg);
+		center.setBackground(Theme.BACKGROUND_COLOR);
 
 		// Inventory panel
 		JPanel invPanel = new JPanel(new BorderLayout(6,6));
-		invPanel.setBackground(panelBg);
-		invPanel.setBorder(BorderFactory.createTitledBorder("Inventario"));
+		invPanel.setBackground(Theme.BACKGROUND_COLOR);
+		invPanel.setBorder(BorderFactory.createTitledBorder("Inventory"));
 
 		invModel = new DefaultListModel<>();
 		lstInventory = new JList<>(invModel);
@@ -71,8 +66,8 @@ public class AddSaleWindow extends JPanel {
 					Videogame g = (Videogame) value;
 					comp.setText(g.getTitle() + " — " + g.getGenre() + " — $" + g.getPrice());
 				}
-				comp.setBackground(isSelected ? new Color(70,70,74) : panelBg);
-				comp.setForeground(textColor);
+				comp.setBackground(isSelected ? new Color(70,70,74) : Theme.BACKGROUND_COLOR);
+				comp.setForeground(Theme.TEXTFIELD_TEXT_COLOR);
 				return comp;
 			}
 		});
@@ -81,18 +76,18 @@ public class AddSaleWindow extends JPanel {
 
 		// Buttons for inventory
 		JPanel invBtns = new JPanel(new FlowLayout(FlowLayout.CENTER));
-		invBtns.setBackground(panelBg);
+		invBtns.setBackground(Theme.BACKGROUND_COLOR);
 		btnAddToCart = new JButton("Añadir al carrito");
 		btnAddToCart.setEnabled(false);
-		btnAddToCart.setBackground(btnBg);
-		btnAddToCart.setForeground(textColor);
+		btnAddToCart.setBackground(Theme.BUTTON_COLOR);
+		btnAddToCart.setForeground(Theme.BUTTON_TEXT_COLOR);
 		btnAddToCart.setFocusPainted(false);
 		invBtns.add(btnAddToCart);
 		invPanel.add(invBtns, BorderLayout.SOUTH);
 
 		// Cart panel
 		JPanel cartPanel = new JPanel(new BorderLayout(6,6));
-		cartPanel.setBackground(panelBg);
+		cartPanel.setBackground(Theme.BACKGROUND_COLOR);
 		cartPanel.setBorder(BorderFactory.createTitledBorder("Carrito"));
 
 		cartModel = new DefaultListModel<>();
@@ -104,8 +99,8 @@ public class AddSaleWindow extends JPanel {
 					Videogame g = (Videogame) value;
 					comp.setText(g.getTitle() + " — $" + g.getPrice());
 				}
-				comp.setBackground(isSelected ? new Color(70,70,74) : panelBg);
-				comp.setForeground(textColor);
+				comp.setBackground(isSelected ? new Color(70,70,74) : Theme.BACKGROUND_COLOR);
+				comp.setForeground(Theme.BUTTON_TEXT_COLOR);
 				return comp;
 			}
 		});
@@ -113,15 +108,15 @@ public class AddSaleWindow extends JPanel {
 		cartPanel.add(cartScroll, BorderLayout.CENTER);
 
 		JPanel cartBtns = new JPanel(new FlowLayout(FlowLayout.CENTER));
-		cartBtns.setBackground(panelBg);
+		cartBtns.setBackground(Theme.BACKGROUND_COLOR);
 		btnRemoveFromCart = new JButton("Quitar");
 		btnRemoveFromCart.setEnabled(false);
-		btnRemoveFromCart.setBackground(btnBg);
-		btnRemoveFromCart.setForeground(textColor);
+		btnRemoveFromCart.setBackground(Theme.BUTTON_COLOR);
+		btnRemoveFromCart.setForeground(Theme.BUTTON_TEXT_COLOR);
 		btnSell = new JButton("Vender");
 		btnSell.setEnabled(false);
 		btnSell.setBackground(new Color(80,130,70));
-		btnSell.setForeground(textColor);
+		btnSell.setForeground(Theme.BUTTON_COLOR);
 		btnSell.setFocusPainted(false);
 		cartBtns.add(btnRemoveFromCart);
 		cartBtns.add(btnSell);
@@ -129,6 +124,9 @@ public class AddSaleWindow extends JPanel {
 
 		center.add(invPanel);
 		center.add(cartPanel);
+
+		Theme.applyFontOnFrame(center, Font.PLAIN, 16f);
+		Theme.applyFontOnFrame(top, Font.PLAIN, 16f);
 
 		add(top, BorderLayout.NORTH);
 		add(center, BorderLayout.CENTER);
