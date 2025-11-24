@@ -1,6 +1,5 @@
 package ui;
 
-import java.io.InputStream;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -31,35 +30,21 @@ public class MainWindow extends JFrame{
         setVisible(true);
         setTitle("");
     }
-    public static void changeFont(Component component,int style, float size) {
-        InputStream is = ClassLoader.getSystemResourceAsStream("ui/GoogleSansFlex.ttf");
-        try {
-            Font font = Font.createFont(Font.TRUETYPE_FONT, is).deriveFont(style,size);
-            component.setFont(font);
-            if (component instanceof Container) {
-                for (Component child : ((Container) component).getComponents()) {
-                    changeFont(child, style, size);
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
     private void initComponents() {
         // Main container: split into actions (left) and content (right)
         pnlMain = new JPanel(new BorderLayout(padding,padding));
         pnlMain.setBorder(BorderFactory.createEmptyBorder(margin,margin,margin,margin));
-        pnlMain.setBackground(Theme.bgColor);
+        pnlMain.setBackground(Theme.BACKGROUND_COLOR);
 
         //Title
         lblTitle = new JLabel("VideoGame Store Manager", SwingConstants.CENTER);
         pnlMain.add(lblTitle, BorderLayout.NORTH);
-        changeFont(lblTitle, Font.BOLD, 20f);
+        Theme.applyFontOnFrame(lblTitle, Font.BOLD, 20f);
 
         // Left actions panel
         pnlActions = new JPanel();
         pnlActions.setLayout(new GridLayout(5,1,padding,padding));
-        pnlActions.setBackground(Theme.bgColor);
+        pnlActions.setBackground(Theme.BACKGROUND_COLOR);
 
         // Buttons
         btnAddGame = new JButton("Agregar juego al inventario");
@@ -73,16 +58,17 @@ public class MainWindow extends JFrame{
             b.setBorder(BorderFactory.createEmptyBorder(padding,padding,padding,padding));
             b.setBorderPainted(false);
             b.setOpaque(true);
-            b.setBackground(Theme.btnColor);
-            b.setForeground(Theme.txtColor);
+            b.setBackground(Theme.BUTTON_COLOR);
+            b.setForeground(Theme.BUTTON_TEXT_COLOR);
             pnlActions.add(b);
         }
-        changeFont(pnlActions, Font.PLAIN, 16f);
+        Theme.applyFontOnFrame(pnlActions, Font.PLAIN, 16f);
 
         // Right content panel
         pnlContent = new JPanel(new BorderLayout(padding,padding));
+        /*
         pnlContent.add(new AddGameWindow()); //Default view
-
+        */
         pnlMain.add(pnlActions, BorderLayout.WEST);
         pnlMain.add(pnlContent, BorderLayout.CENTER);
 
@@ -90,6 +76,7 @@ public class MainWindow extends JFrame{
         add(pnlMain);
     }
     private void initEvents() {
+        /*
         btnAddGame.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
                 // Replace the content area center with the AddGameWindow panel
@@ -101,7 +88,9 @@ public class MainWindow extends JFrame{
                 pnlContent.revalidate();
                 pnlContent.repaint();
             }
+
         });
+        */
         btnMakePurchase.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
                 // Replace the content area center with the AddSaleWindow panel
