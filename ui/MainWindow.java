@@ -21,14 +21,12 @@ public class MainWindow extends JFrame{
     private JButton btnSearchSale;
 
     public MainWindow(){
-        setTitle("VideoGame Store");
         setSize(800,600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         initComponents();
         initEvents();
         setVisible(true);
-        setTitle("");
     }
     private void initComponents() {
         // Main container: split into actions (left) and content (right)
@@ -66,9 +64,7 @@ public class MainWindow extends JFrame{
 
         // Right content panel
         pnlContent = new JPanel(new BorderLayout(padding,padding));
-        /*
         pnlContent.add(new AddGameWindow()); //Default view
-        */
         pnlMain.add(pnlActions, BorderLayout.WEST);
         pnlMain.add(pnlContent, BorderLayout.CENTER);
 
@@ -76,10 +72,8 @@ public class MainWindow extends JFrame{
         add(pnlMain);
     }
     private void initEvents() {
-        /*
         btnAddGame.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
-                // Replace the content area center with the AddGameWindow panel
                 try {
                     pnlContent.removeAll();;
                 } catch (Exception ex) { }
@@ -90,10 +84,8 @@ public class MainWindow extends JFrame{
             }
 
         });
-        */
         btnMakePurchase.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
-                // Replace the content area center with the AddSaleWindow panel
                 try {
                     pnlContent.removeAll();;
                 } catch (Exception ex) { }
@@ -105,7 +97,6 @@ public class MainWindow extends JFrame{
         });
         btnSearchCustomer.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
-                // Replace the content area center with the LookForClientWindow panel
                 try {
                     pnlContent.removeAll();;
                 } catch (Exception ex) { }
@@ -117,7 +108,6 @@ public class MainWindow extends JFrame{
         });
         btnSearchGame.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
-                // Replace the content area center with the LookForGameWindow panel
                 try {
                     pnlContent.removeAll();;
                 } catch (Exception ex) { }
@@ -129,7 +119,6 @@ public class MainWindow extends JFrame{
         });
         btnSearchSale.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
-                // Replace the content area center with the LookForSaleWindow panel
                 try {
                     pnlContent.removeAll();;
                 } catch (Exception ex) { }

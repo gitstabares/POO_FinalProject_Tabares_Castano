@@ -25,6 +25,10 @@ public class AddGameWindow extends JPanel {
 
 		setBackground(Theme.BACKGROUND_COLOR);
 
+		JPanel root = new JPanel(new BorderLayout());
+		root.setBackground(Theme.BACKGROUND_COLOR);
+		root.setBorder(BorderFactory.createEmptyBorder(12,12,12,12));
+
 		JPanel form = new JPanel(new GridBagLayout());
 		form.setBackground(Theme.BACKGROUND_COLOR);
 		form.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
@@ -34,49 +38,45 @@ public class AddGameWindow extends JPanel {
 		c.fill = GridBagConstraints.HORIZONTAL;
 
 		JLabel lblTitle = new JLabel("Título:");
-		lblTitle.setForeground(Theme.BUTTON_TEXT_COLOR);
+		lblTitle.setForeground(Theme.TEXTFIELD_TEXT_COLOR);
 		c.gridx = 0; c.gridy = 0; c.weightx = 0.2;
 		form.add(lblTitle, c);
 
 		txtTitle = new JTextField();
-		txtTitle.setBackground(Color.WHITE);
-		txtTitle.setForeground(Theme.BUTTON_COLOR);
+		txtTitle.setForeground(Theme.TEXTFIELD_TEXT_COLOR);
 		txtTitle.setBorder(BorderFactory.createEmptyBorder(6,6,6,6));
 		c.gridx = 1; c.gridy = 0; c.weightx = 0.8;
 		form.add(txtTitle, c);
 
 		JLabel lblGenre = new JLabel("Género:");
-		lblGenre.setForeground(Theme.BUTTON_TEXT_COLOR);
+		lblGenre.setForeground(Theme.TEXTFIELD_TEXT_COLOR);
 		c.gridx = 0; c.gridy = 1; c.weightx = 0.2;
 		form.add(lblGenre, c);
 
 		txtGenre = new JTextField();
-		txtGenre.setBackground(Color.WHITE);
-		txtGenre.setForeground(Theme.BUTTON_COLOR);
+		txtGenre.setForeground(Theme.TEXTFIELD_TEXT_COLOR);
 		txtGenre.setBorder(BorderFactory.createEmptyBorder(6,6,6,6));
 		c.gridx = 1; c.gridy = 1; c.weightx = 0.8;
 		form.add(txtGenre, c);
 
 		JLabel lblPrice = new JLabel("Precio:");
-		lblPrice.setForeground(Theme.BUTTON_TEXT_COLOR);
+		lblPrice.setForeground(Theme.TEXTFIELD_TEXT_COLOR);
 		c.gridx = 0; c.gridy = 2; c.weightx = 0.2;
 		form.add(lblPrice, c);
 
 		txtPrice = new JTextField();
-		txtPrice.setBackground(Color.WHITE);
-		txtPrice.setForeground(Theme.BUTTON_COLOR);
+		txtPrice.setForeground(Theme.TEXTFIELD_TEXT_COLOR);
 		txtPrice.setBorder(BorderFactory.createEmptyBorder(6,6,6,6));
 		c.gridx = 1; c.gridy = 2; c.weightx = 0.8;
 		form.add(txtPrice, c);
 
 		JLabel lblScore = new JLabel("Puntaje (opcional 0-5):");
-		lblScore.setForeground(Theme.BUTTON_TEXT_COLOR);
+		lblScore.setForeground(Theme.TEXTFIELD_TEXT_COLOR);
 		c.gridx = 0; c.gridy = 3; c.weightx = 0.2;
 		form.add(lblScore, c);
 
 		txtScore = new JTextField();
-		txtScore.setBackground(Color.WHITE);
-		txtScore.setForeground(Theme.BUTTON_COLOR);
+		txtScore.setForeground(Theme.TEXTFIELD_TEXT_COLOR);
 		txtScore.setBorder(BorderFactory.createEmptyBorder(6,6,6,6));
 		c.gridx = 1; c.gridy = 3; c.weightx = 0.8;
 		form.add(txtScore, c);
@@ -87,17 +87,18 @@ public class AddGameWindow extends JPanel {
 		btnAdd = new JButton("Add Videogame");
 		btnAdd.setEnabled(false);
 		btnAdd.setBackground(Theme.BUTTON_COLOR);
-		btnAdd.setForeground(Theme.BUTTON_TEXT_COLOR);
+		btnAdd.setForeground(Theme.TEXTFIELD_TEXT_COLOR);
 		btnAdd.setFocusPainted(false);
 		btnAdd.setBorder(BorderFactory.createEmptyBorder(6,12,6,12));
 		btnAdd.setBorderPainted(false);
 		actions.add(btnAdd);
 
-		form.add(actions, BorderLayout.SOUTH);
+		root.add(form, BorderLayout.CENTER);
+		root.add(actions, BorderLayout.SOUTH);
 
 		setLayout(new BorderLayout());
-        Theme.applyFontOnFrame(form, Font.PLAIN, 16f);
-		add(form, BorderLayout.CENTER);
+        Theme.applyFontOnFrame(root, Font.PLAIN, 16f);
+		add(root, BorderLayout.CENTER);
 	}
 
 	private void initEvents() {
