@@ -3,18 +3,21 @@ package domain;
 // Represents a sale transaction in the system
 
 import java.util.ArrayList;
-import java.util.GregorianCalendar;
+import java.time.LocalDate;
 
 public class Sale {
     private float cost;
-    private GregorianCalendar date;
+    private LocalDate date;
     private ArrayList<Videogame> purchase;
 
     // Constructor
-    public Sale(float cost, GregorianCalendar date, ArrayList<Videogame> purchase) {
-        this.cost = cost;
-        this.date = date;
+    public Sale(ArrayList<Videogame> purchase) {
+        for (Videogame game : purchase) {
+            this.cost += game.getPrice();
+        }
+        this.date = LocalDate.now();
         this.purchase = purchase;
+        Store.addSale(this);
     }
 
     // Getters
@@ -22,7 +25,7 @@ public class Sale {
         return cost;
     }
 
-    public GregorianCalendar getDate() {
+    public LocalDate getDate() {
         return date;
     }
 

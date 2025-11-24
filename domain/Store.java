@@ -1,7 +1,7 @@
 package domain;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.GregorianCalendar;
 import java.util.List;
 
 public class Store {
@@ -29,6 +29,9 @@ public class Store {
         income += sale.getCost();
     }
     // Getters functions to retrieve data from the static lists
+    public static List<Videogame> getVideoGames() {
+        return inventory;
+    }
     public static List<Videogame> lookGameByGenre(String genre) {
         List<Videogame> foundGames = new ArrayList<>();
         for (Videogame game : inventory) {
@@ -49,7 +52,7 @@ public class Store {
     public static List<Sale> lookSalesByClient(Customer customer) {
         return customer.getSales();
     }
-    public static List<Sale> lookSalesByDate(GregorianCalendar date) {
+    public static List<Sale> lookSalesByDate(LocalDate date) {
         List<Sale> foundSales = new ArrayList<>();
         for (Sale sale : sales) {
             if (sale.getDate().equals(date)) {
