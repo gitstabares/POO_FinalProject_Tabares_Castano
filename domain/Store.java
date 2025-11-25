@@ -32,22 +32,34 @@ public class Store {
     public static List<Videogame> getVideoGames() {
         return inventory;
     }
+    public static List<Customer> getCustomers() {
+        return customers;
+    }
+    public static List<Sale> getSales() {
+        return sales;
+    }
+    public static float getIncome() {
+        return income;
+    }
     public static List<Videogame> lookGameByGenre(String genre) {
         List<Videogame> foundGames = new ArrayList<>();
+        genre = genre.toLowerCase();
         for (Videogame game : inventory) {
-            if (game.getGenre().equalsIgnoreCase(genre)) {
+            if (game.getGenre().toLowerCase().contains(genre)) {
                 foundGames.add(game);
             }
         }
         return foundGames;
     }
-    public static Videogame lookGameByTitle(String title) {
+    public static List<Videogame> lookGameByTitle(String title) {
+        List<Videogame> foundGames = new ArrayList<>();
+        title = title.toLowerCase();
         for (Videogame game : inventory) {
-            if (game.getTitle().equalsIgnoreCase(title)) {
-                return game;
+            if (game.getTitle().toLowerCase().contains(title)) {
+                foundGames.add(game);
             }
         }
-        return null;
+        return foundGames;
     }
     public static List<Sale> lookSalesByClient(Customer customer) {
         return customer.getSales();
