@@ -1,10 +1,11 @@
 package domain;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.List;
 
-public class Store {
+public class Store implements Serializable {
     // Static list for videogames, sales, and customers
     private static List<Videogame> inventory = new ArrayList<>();
     private static List<Sale> sales = new ArrayList<>();

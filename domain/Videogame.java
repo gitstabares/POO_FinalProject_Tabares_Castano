@@ -1,6 +1,7 @@
 package domain;
 
-public class Videogame {
+import java.io.Serializable;
+public class Videogame implements Serializable {
     // Attributes of the videogame
     private String title;
     private String genre;
