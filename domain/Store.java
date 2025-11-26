@@ -82,4 +82,12 @@ public class Store implements Serializable {
         }
         return foundSales;
     }
+        public static Sale lookSalesById(int id) {
+        for (Sale sale : sales) {
+            if (sale.getId() == id) {
+                return sale;
+            }
+        }
+        return null;
+    }
 }
