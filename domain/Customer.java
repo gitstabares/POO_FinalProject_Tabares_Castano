@@ -15,6 +15,7 @@ public class Customer implements Serializable {
         this.name = name;
         this.id = id;
         this.gameLibrary = new ArrayList<>();
+        Store.addCustomer(this);
     }
 
     //Getters of the variables

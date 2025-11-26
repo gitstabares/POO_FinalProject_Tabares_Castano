@@ -1,8 +1,8 @@
 package domain;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.GregorianCalendar;
 import java.util.List;
 
 public class Store implements Serializable {
@@ -30,10 +30,33 @@ public class Store implements Serializable {
         income += sale.getCost();
     }
     // Getters functions to retrieve data from the static lists
+    public static List<Videogame> getVideoGames() {
+        return inventory;
+    }
+    public static List<Customer> getCustomers() {
+        return customers;
+    }
+    public static List<Sale> getSales() {
+        return sales;
+    }
+    public static float getIncome() {
+        return income;
+    }
     public static List<Videogame> lookGameByGenre(String genre) {
         List<Videogame> foundGames = new ArrayList<>();
+        genre = genre.toLowerCase();
         for (Videogame game : inventory) {
-            if (game.getGenre().equalsIgnoreCase(genre)) {
+            if (game.getGenre().toLowerCase().contains(genre)) {
+                foundGames.add(game);
+            }
+        }
+        return foundGames;
+    }
+    public static List<Videogame> lookGamesByTitle(String title) {
+        List<Videogame> foundGames = new ArrayList<>();
+        title = title.toLowerCase();
+        for (Videogame game : inventory) {
+            if (game.getTitle().toLowerCase().contains(title)) {
                 foundGames.add(game);
             }
         }
@@ -50,7 +73,7 @@ public class Store implements Serializable {
     public static List<Sale> lookSalesByClient(Customer customer) {
         return customer.getSales();
     }
-    public static List<Sale> lookSalesByDate(GregorianCalendar date) {
+    public static List<Sale> lookSalesByDate(LocalDate date) {
         List<Sale> foundSales = new ArrayList<>();
         for (Sale sale : sales) {
             if (sale.getDate().equals(date)) {
