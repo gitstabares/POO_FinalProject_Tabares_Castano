@@ -2,10 +2,11 @@ package domain;
 
 // Represents a sale transaction in the system
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.time.LocalDate;
 
-public class Sale {
+public class Sale implements Serializable {
     private float cost;
     private LocalDate date;
     private ArrayList<Videogame> purchase;

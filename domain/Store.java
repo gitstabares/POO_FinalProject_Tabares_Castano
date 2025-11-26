@@ -1,10 +1,11 @@
 package domain;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Store {
+public class Store implements Serializable {
     // Static list for videogames, sales, and customers
     private static List<Videogame> inventory = new ArrayList<>();
     private static List<Sale> sales = new ArrayList<>();
@@ -51,7 +52,7 @@ public class Store {
         }
         return foundGames;
     }
-    public static List<Videogame> lookGameByTitle(String title) {
+    public static List<Videogame> lookGamesByTitle(String title) {
         List<Videogame> foundGames = new ArrayList<>();
         title = title.toLowerCase();
         for (Videogame game : inventory) {
@@ -60,6 +61,14 @@ public class Store {
             }
         }
         return foundGames;
+    }
+    public static Videogame lookGameByTitle(String title) {
+        for (Videogame game : inventory) {
+            if (game.getTitle().equalsIgnoreCase(title)) {
+                return game;
+            }
+        }
+        return null;
     }
     public static List<Sale> lookSalesByClient(Customer customer) {
         return customer.getSales();
