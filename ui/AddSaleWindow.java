@@ -193,11 +193,7 @@ public class AddSaleWindow extends JPanel {
 				ArrayList<Videogame> purchase = new ArrayList<>();
 				for (int i = 0; i < cartModel.getSize(); i++) purchase.add(cartModel.getElementAt(i));
 				Sale sale;
-				if (customer != null) {
-					sale = new Sale(purchase, customer);
-				} else {
-					sale = new Sale(purchase);
-				}
+				sale = new Sale(purchase, customer);
 				JOptionPane.showMessageDialog(SwingUtilities.getWindowAncestor(AddSaleWindow.this), "Sale Performed. Total cost: $" + sale.getCost(), "Sale", JOptionPane.INFORMATION_MESSAGE);
 				cartModel.clear();
 				btnSell.setEnabled(false);

@@ -35,17 +35,6 @@ public class Sale implements Serializable {
         customer.addGame(purchase);
     }
 
-    // Backwards-compatible constructor for sales without a customer
-    public Sale(List<Videogame> purchase) {
-        for (Videogame game : purchase) {
-            this.cost += game.getPrice();
-        }
-        this.date = LocalDate.now();
-        this.id = idCounter++;
-        this.purchase = purchase;
-        Store.addSale(this);
-    }
-
     // Getters
     public float getCost() {
         return cost;
@@ -61,5 +50,10 @@ public class Sale implements Serializable {
 
     public int getId() {
         return id;
+    }
+
+    @Override
+    public String toString() {
+        return String.valueOf(id);
     }
 }

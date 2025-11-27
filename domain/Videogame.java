@@ -42,4 +42,8 @@ public class Videogame implements Serializable {
     public void setScore(int score) {
         if (score >= 0 && score <= 5)   this.score = score;
     }
+    @Override
+    public String toString() {
+        return title;
+    }
 }
