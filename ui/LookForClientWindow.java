@@ -145,7 +145,7 @@ public class LookForClientWindow extends JPanel {
 		if ("ID".equalsIgnoreCase(type)) {
 			found = Store.lookCustomerById(f);
 		} else {
-			found = Store.lookCustomerByName(f);
+			found = Store.lookCustomersByName(f);
 		}
 		for (Customer c : found) model.addElement(c);
 	}

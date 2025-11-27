@@ -108,7 +108,7 @@ public class Store implements Serializable {
         return foundCustomers;
     }
     // Look customer by name (partial match)
-    public static List<Customer> lookCustomerByName(String name) {
+    public static List<Customer> lookCustomersByName(String name) {
         List<Customer> foundCustomers = new ArrayList<>();
         name = name.toLowerCase();
         for (Customer customer : customers) {
@@ -117,5 +117,15 @@ public class Store implements Serializable {
             }
         }
         return foundCustomers;
+    }
+    // Look customer by exact name
+    public static Customer lookCustomerByName(String name) {
+        name = name.toLowerCase();
+        for (Customer customer : customers) {
+            if (customer.getName().toLowerCase().contains(name)) {
+                return customer;
+            }
+        }
+        return null;
     }
 }
