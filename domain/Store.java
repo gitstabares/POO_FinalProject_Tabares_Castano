@@ -43,7 +43,7 @@ public class Store implements Serializable {
         return income;
     }
     // Look videogames by genre (partial match)
-    public static List<Videogame> lookGameByGenre(String genre) {
+    public static List<Videogame> lookGamesByGenre(String genre) {
         List<Videogame> foundGames = new ArrayList<>();
         genre = genre.toLowerCase();
         for (Videogame game : inventory) {
