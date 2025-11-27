@@ -21,9 +21,9 @@ public class Customer implements Serializable {
     }
 
     // Constructor for new customers
-    public Customer(String name, int id) {
+    public Customer(String name) {
         this.name = name;
-        this.id = id;
+        this.id = idCounter++;
         this.gameLibrary = new ArrayList<>();
         this.sales = new ArrayList<>();
         Store.addCustomer(this);
