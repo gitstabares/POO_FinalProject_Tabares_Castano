@@ -3,6 +3,7 @@ package ui;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import data.StorageManager;
 
 public class MainWindow extends JFrame{
     
@@ -15,17 +16,26 @@ public class MainWindow extends JFrame{
     private JLabel lblTitle;
 
     private JButton btnAddGame;
-    private JButton btnMakePurchase;
     private JButton btnSearchCustomer;
     private JButton btnSearchGame;
     private JButton btnSearchSale;
 
     public MainWindow(){
+        StorageManager.loadStore();
         setSize(800,600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         initComponents();
         initEvents();
+
+        // Save store on window close
+        this.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                StorageManager.saveStore();
+            }
+        });
+
         setVisible(true);
     }
     private void initComponents() {
@@ -41,16 +51,15 @@ public class MainWindow extends JFrame{
 
         // Left actions panel
         pnlActions = new JPanel();
-        pnlActions.setLayout(new GridLayout(5,1,padding,padding));
+        pnlActions.setLayout(new GridLayout(4,1,padding,padding));
         pnlActions.setBackground(Theme.BACKGROUND_COLOR);
 
         // Buttons
         btnAddGame = new JButton("Agregar juego al inventario");
-        btnMakePurchase = new JButton("Realizar compra");
         btnSearchCustomer = new JButton("Buscar cliente");
         btnSearchGame = new JButton("Buscar juego");
         btnSearchSale = new JButton("Buscar venta");
-        JButton[] buttons = {btnAddGame, btnMakePurchase, btnSearchCustomer, btnSearchGame, btnSearchSale};
+        JButton[] buttons = {btnAddGame, btnSearchCustomer, btnSearchGame, btnSearchSale};
         for (JButton b : buttons) {
             b.setFocusPainted(false);
             b.setBorder(BorderFactory.createEmptyBorder(padding,padding,padding,padding));
@@ -83,17 +92,6 @@ public class MainWindow extends JFrame{
                 pnlContent.repaint();
             }
 
-        });
-        btnMakePurchase.addActionListener(new ActionListener(){
-            public void actionPerformed(ActionEvent e){
-                try {
-                    pnlContent.removeAll();;
-                } catch (Exception ex) { }
-                AddSaleWindow salePanel = new AddSaleWindow();
-                pnlContent.add(salePanel, BorderLayout.CENTER);
-                pnlContent.revalidate();
-                pnlContent.repaint();
-            }
         });
         btnSearchCustomer.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){

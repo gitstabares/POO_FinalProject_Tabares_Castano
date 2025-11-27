@@ -153,7 +153,7 @@ public class StorageManager {
         String genre = p[1];
         int score = Integer.parseInt(p[2]);
         float price = Float.parseFloat(p[3]);
-        return new Videogame(title, genre, price, score);
+        return new Videogame(title, genre, score, price);
     }
 
      

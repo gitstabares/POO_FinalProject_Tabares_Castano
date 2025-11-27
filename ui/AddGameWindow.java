@@ -87,7 +87,7 @@ public class AddGameWindow extends JPanel {
 		btnAdd = new JButton("Add Videogame");
 		btnAdd.setEnabled(false);
 		btnAdd.setBackground(Theme.BUTTON_COLOR);
-		btnAdd.setForeground(Theme.TEXTFIELD_TEXT_COLOR);
+		btnAdd.setForeground(Theme.BUTTON_TEXT_COLOR);
 		btnAdd.setFocusPainted(false);
 		btnAdd.setBorder(BorderFactory.createEmptyBorder(6,12,6,12));
 		btnAdd.setBorderPainted(false);
@@ -140,7 +140,7 @@ public class AddGameWindow extends JPanel {
 						JOptionPane.showMessageDialog(AddGameWindow.this, "Puntaje inválido. Debe ser entero entre 0 y 5.", "Error", JOptionPane.ERROR_MESSAGE);
 						return;
 					}
-					new Videogame(title, genre, price, score);
+					new Videogame(title, genre, score, price);
 				}
 
 				JOptionPane.showMessageDialog(SwingUtilities.getWindowAncestor(AddGameWindow.this), "Videojuego agregado al inventario.", "OK", JOptionPane.INFORMATION_MESSAGE);
