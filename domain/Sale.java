@@ -13,7 +13,7 @@ public class Sale implements Serializable {
     private static int idCounter = 0;
     private int id;
 
-    // Constructor
+    // Constructor for loading from storage
     public Sale(List<Videogame> purchase, int id, LocalDate date, float cost) {
         this.cost = cost;
         this.date = date;
@@ -22,6 +22,7 @@ public class Sale implements Serializable {
         Store.addSale(this);
     }
 
+    // Constructor for new sales
     public Sale(List<Videogame> purchase, Customer customer) {
         for (Videogame game : purchase) {
             this.cost += game.getPrice();
@@ -32,6 +33,17 @@ public class Sale implements Serializable {
         Store.addSale(this);
         customer.addSale(this);
         customer.addGame(purchase);
+    }
+
+    // Backwards-compatible constructor for sales without a customer
+    public Sale(List<Videogame> purchase) {
+        for (Videogame game : purchase) {
+            this.cost += game.getPrice();
+        }
+        this.date = LocalDate.now();
+        this.id = idCounter++;
+        this.purchase = purchase;
+        Store.addSale(this);
     }
 
     // Getters

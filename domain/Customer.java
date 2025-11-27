@@ -11,7 +11,7 @@ public class Customer implements Serializable {
     private List<Videogame> gameLibrary;
     private List<Sale> sales;
 
-    // Constructor
+    // Constructor for loading from storage
     public Customer(String name, int id, List<Videogame> gameLibrary, List<Sale> sales) {
         this.name = name;
         this.id = id;
@@ -20,6 +20,7 @@ public class Customer implements Serializable {
         Store.addCustomer(this);
     }
 
+    // Constructor for new customers
     public Customer(String name, int id) {
         this.name = name;
         this.id = id;
@@ -54,5 +55,9 @@ public class Customer implements Serializable {
 
     public void addSale(Sale sale) {
         sales.add(sale);
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

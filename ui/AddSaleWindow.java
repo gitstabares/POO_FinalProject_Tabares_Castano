@@ -3,6 +3,7 @@ package ui;
 import domain.Store;
 import domain.Videogame;
 import domain.Sale;
+import domain.Customer;
 
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
@@ -26,9 +27,23 @@ public class AddSaleWindow extends JPanel {
 	private JButton btnRemoveFromCart;
 	private JButton btnSell;
 
+	private Customer customer;
+
 	public AddSaleWindow() {
 		initComponents();
 		initEvents();
+	}
+
+	public AddSaleWindow(Customer customer) {
+		this.customer = customer;
+		initComponents();
+		initEvents();
+		// Show customer label at top
+		if (customer != null) {
+			JLabel info = new JLabel("Cliente: " + customer.getName() + " (" + customer.getId() + ")");
+			info.setForeground(Theme.TEXTFIELD_TEXT_COLOR);
+			add(info, BorderLayout.SOUTH);
+		}
 	}
 
 	private void initComponents() {
@@ -66,7 +81,6 @@ public class AddSaleWindow extends JPanel {
 					Videogame g = (Videogame) value;
 					comp.setText(g.getTitle() + " — " + g.getGenre() + " — $" + g.getPrice());
 				}
-				comp.setBackground(isSelected ? new Color(70,70,74) : Theme.BACKGROUND_COLOR);
 				comp.setForeground(Theme.TEXTFIELD_TEXT_COLOR);
 				return comp;
 			}
@@ -99,7 +113,6 @@ public class AddSaleWindow extends JPanel {
 					Videogame g = (Videogame) value;
 					comp.setText(g.getTitle() + " — $" + g.getPrice());
 				}
-				comp.setBackground(isSelected ? new Color(70,70,74) : Theme.BACKGROUND_COLOR);
 				comp.setForeground(Theme.BUTTON_TEXT_COLOR);
 				return comp;
 			}
@@ -116,7 +129,7 @@ public class AddSaleWindow extends JPanel {
 		btnSell = new JButton("Vender");
 		btnSell.setEnabled(false);
 		btnSell.setBackground(new Color(80,130,70));
-		btnSell.setForeground(Theme.BUTTON_COLOR);
+		btnSell.setForeground(Theme.BUTTON_TEXT_COLOR);
 		btnSell.setFocusPainted(false);
 		cartBtns.add(btnRemoveFromCart);
 		cartBtns.add(btnSell);
@@ -179,12 +192,30 @@ public class AddSaleWindow extends JPanel {
 				if (cartModel.getSize() == 0) return;
 				ArrayList<Videogame> purchase = new ArrayList<>();
 				for (int i = 0; i < cartModel.getSize(); i++) purchase.add(cartModel.getElementAt(i));
-				Sale sale = new Sale(purchase);
+				Sale sale;
+				if (customer != null) {
+					sale = new Sale(purchase, customer);
+				} else {
+					sale = new Sale(purchase);
+				}
 				JOptionPane.showMessageDialog(SwingUtilities.getWindowAncestor(AddSaleWindow.this), "Venta realizada. Total: $" + sale.getCost(), "Venta", JOptionPane.INFORMATION_MESSAGE);
 				cartModel.clear();
 				btnSell.setEnabled(false);
 			}
 		});
+	}
+
+	// Allow returning from a customer-specific sale view
+	public void setReturnAction(Runnable r) {
+		JButton btnReturn = new JButton("Regresar");
+		btnReturn.setBackground(Theme.BUTTON_COLOR);
+		btnReturn.setForeground(Theme.BUTTON_TEXT_COLOR);
+		btnReturn.setFocusPainted(false);
+		btnReturn.addActionListener(e -> r.run());
+		JPanel south = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+		south.setBackground(Theme.BACKGROUND_COLOR);
+		south.add(btnReturn);
+		add(south, BorderLayout.SOUTH);
 	}
 
 	private void updateInventoryList(String filter) {

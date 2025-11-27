@@ -7,14 +7,15 @@ public class Videogame implements Serializable {
     private String genre;
     private int score;
     private float price;
-    // Constructors
-    public Videogame(String title, String genre, float price, int score) {
+    // Constructor for loading from storage
+    public Videogame(String title, String genre, int score, float price) {
         this.title = title;
         this.genre = genre;
         this.price = price;
         this.score = score;
         Store.addGame(this);
     }
+    // Constructor for new games
     public Videogame(String title, String genre, float price) {
         this.title = title;
         this.genre = genre;

@@ -42,6 +42,7 @@ public class Store implements Serializable {
     public static float getIncome() {
         return income;
     }
+    // Look videogames by genre (partial match)
     public static List<Videogame> lookGameByGenre(String genre) {
         List<Videogame> foundGames = new ArrayList<>();
         genre = genre.toLowerCase();
@@ -52,6 +53,7 @@ public class Store implements Serializable {
         }
         return foundGames;
     }
+    // Look videogames by title (partial match)
     public static List<Videogame> lookGamesByTitle(String title) {
         List<Videogame> foundGames = new ArrayList<>();
         title = title.toLowerCase();
@@ -62,6 +64,7 @@ public class Store implements Serializable {
         }
         return foundGames;
     }
+    // Look videogame by exact title
     public static Videogame lookGameByTitle(String title) {
         for (Videogame game : inventory) {
             if (game.getTitle().equalsIgnoreCase(title)) {
@@ -70,9 +73,11 @@ public class Store implements Serializable {
         }
         return null;
     }
+    // Look sales by customer
     public static List<Sale> lookSalesByClient(Customer customer) {
         return customer.getSales();
     }
+    // Look sales by date
     public static List<Sale> lookSalesByDate(LocalDate date) {
         List<Sale> foundSales = new ArrayList<>();
         for (Sale sale : sales) {
@@ -82,6 +87,7 @@ public class Store implements Serializable {
         }
         return foundSales;
     }
+    // Look sales by id
         public static Sale lookSalesById(int id) {
         for (Sale sale : sales) {
             if (sale.getId() == id) {
@@ -89,5 +95,27 @@ public class Store implements Serializable {
             }
         }
         return null;
+    }
+    // Look customer by id (partial match)
+    public static List<Customer> lookCustomerById(String id) {
+        List<Customer> foundCustomers = new ArrayList<>();
+        id = id.toLowerCase();
+        for (Customer customer : customers) {
+            if (Integer.toString(customer.getId()).toLowerCase().contains(id)) {
+                foundCustomers.add(customer);
+            }
+        }
+        return foundCustomers;
+    }
+    // Look customer by name (partial match)
+    public static List<Customer> lookCustomerByName(String name) {
+        List<Customer> foundCustomers = new ArrayList<>();
+        name = name.toLowerCase();
+        for (Customer customer : customers) {
+            if (customer.getName().toLowerCase().contains(name)) {
+                foundCustomers.add(customer);
+            }
+        }
+        return foundCustomers;
     }
 }
