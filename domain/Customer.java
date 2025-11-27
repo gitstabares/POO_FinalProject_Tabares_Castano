@@ -15,6 +15,7 @@ public class Customer implements Serializable {
     public Customer(String name, int id, List<Videogame> gameLibrary, List<Sale> sales) {
         this.name = name;
         this.id = id;
+        if (id >= idCounter) idCounter = id+1;
         this.gameLibrary = new ArrayList<>(gameLibrary);
         this.sales = new ArrayList<>(sales);
         Store.addCustomer(this);

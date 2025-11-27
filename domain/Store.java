@@ -74,8 +74,12 @@ public class Store implements Serializable {
         return null;
     }
     // Look sales by customer
-    public static List<Sale> lookSalesByClient(Customer customer) {
-        return customer.getSales();
+    public static List<Sale> lookSalesByClient(List<Customer> customers) {
+        List<Sale> foundSales = new ArrayList<>();
+        for (Customer customer : customers) {
+            foundSales.addAll(customer.getSales());
+        }
+        return foundSales;
     }
     // Look sales by date
     public static List<Sale> lookSalesByDate(LocalDate date) {

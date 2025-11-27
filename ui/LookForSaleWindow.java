@@ -37,6 +37,13 @@ public class LookForSaleWindow extends JPanel {
 		top.add(searchType, BorderLayout.WEST);
 		top.add(txtSearch, BorderLayout.CENTER);
 
+		// Search button to trigger lookup on demand
+		JButton btnSearch = new JButton("Search");
+		btnSearch.addActionListener(evt -> performSearch());
+		btnSearch.setBackground(Theme.BUTTON_COLOR);
+		btnSearch.setForeground(Theme.BUTTON_TEXT_COLOR);
+		top.add(btnSearch, BorderLayout.EAST);
+
 		add(top, BorderLayout.NORTH);
 
 		// Table for results
@@ -53,12 +60,7 @@ public class LookForSaleWindow extends JPanel {
 
 		Theme.applyFontOnFrame(this, Font.PLAIN, 16f);
 
-		// Real-time search on typing
-		txtSearch.getDocument().addDocumentListener(new javax.swing.event.DocumentListener() {
-			public void insertUpdate(javax.swing.event.DocumentEvent e) { performSearch(); }
-			public void removeUpdate(javax.swing.event.DocumentEvent e) { performSearch(); }
-			public void changedUpdate(javax.swing.event.DocumentEvent e) { performSearch(); }
-		});
+		// Search is triggered by the button now (no real-time updates)
 
 	}
 
@@ -80,7 +82,7 @@ public class LookForSaleWindow extends JPanel {
 		} else if ("Date".equalsIgnoreCase(type)) {
 			results = Store.lookSalesByDate(LocalDate.parse(f, formatter));
 		} else if ("Client".equalsIgnoreCase(type)) {
-            results = Store.lookSalesByClient(Store.lookCustomerByName(f));
+            results = Store.lookSalesByClient(Store.lookCustomersByName(f));
         } else {
             results = Store.getSales();
         }

@@ -19,6 +19,7 @@ public class LookForClientWindow extends JPanel {
 	private DefaultListModel<Customer> model;
 	private JButton btnEditName;
 	private JButton btnMakeSale;
+	private JButton btnAddCustomer;
 
 	public LookForClientWindow() {
 		initComponents();
@@ -68,14 +69,19 @@ public class LookForClientWindow extends JPanel {
 		btnEditName.setEnabled(false);
 		btnMakeSale = new JButton("Realizar venta");
 		btnMakeSale.setEnabled(false);
+			btnAddCustomer = new JButton("Agregar cliente");
+			btnAddCustomer.setBackground(Theme.BUTTON_COLOR);
+			btnAddCustomer.setForeground(Theme.BUTTON_TEXT_COLOR);
+			btnAddCustomer.setFocusPainted(false);
 		btnEditName.setBackground(Theme.BUTTON_COLOR);
 		btnEditName.setForeground(Theme.BUTTON_TEXT_COLOR);
 		btnMakeSale.setBackground(new Color(80,130,70));
 		btnMakeSale.setForeground(Theme.BUTTON_TEXT_COLOR);
 		btnEditName.setFocusPainted(false);
 		btnMakeSale.setFocusPainted(false);
-		bottom.add(btnEditName);
-		bottom.add(btnMakeSale);
+			bottom.add(btnAddCustomer);
+			bottom.add(btnEditName);
+			bottom.add(btnMakeSale);
 
 		add(top, BorderLayout.NORTH);
 		add(sc, BorderLayout.CENTER);
@@ -128,6 +134,25 @@ public class LookForClientWindow extends JPanel {
 					parent.revalidate();
 					parent.repaint();
 				}
+			}
+		});
+
+		// Add customer button: create a Customer using the search text or an input dialog
+		btnAddCustomer.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String name = txtSearch.getText() == null ? "" : txtSearch.getText().trim();
+				if (name.isEmpty()) {
+					name = JOptionPane.showInputDialog(SwingUtilities.getWindowAncestor(LookForClientWindow.this), "Nombre del cliente:");
+					if (name == null) return; // user cancelled
+					name = name.trim();
+					if (name.isEmpty()) return;
+				}
+				// Create and add the customer to the Store via constructor
+				new Customer(name);
+				// Refresh list and show the newly added customer
+				updateList(name);
+				// Optionally clear the search field
+				// txtSearch.setText("");
 			}
 		});
 	}
