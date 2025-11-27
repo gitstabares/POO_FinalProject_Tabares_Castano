@@ -55,10 +55,10 @@ public class MainWindow extends JFrame{
         pnlActions.setBackground(Theme.BACKGROUND_COLOR);
 
         // Buttons
-        btnAddGame = new JButton("Agregar juego al inventario");
-        btnSearchCustomer = new JButton("Buscar cliente");
-        btnSearchGame = new JButton("Buscar juego");
-        btnSearchSale = new JButton("Buscar venta");
+        btnAddGame = new JButton("Add game to stock");
+        btnSearchCustomer = new JButton("Look for client");
+        btnSearchGame = new JButton("Look for game");
+        btnSearchSale = new JButton("Look for sale");
         JButton[] buttons = {btnAddGame, btnSearchCustomer, btnSearchGame, btnSearchSale};
         for (JButton b : buttons) {
             b.setFocusPainted(false);

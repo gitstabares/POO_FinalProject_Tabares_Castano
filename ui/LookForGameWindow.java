@@ -20,16 +20,20 @@ public class LookForGameWindow extends JPanel {
 		setLayout(new BorderLayout(8, 8));
 		setBackground(Theme.BACKGROUND_COLOR);
 		setBorder(BorderFactory.createEmptyBorder(8, 8, 8, 8));
+		initComponents();
+		initEvents();
+	}
 
+	private void initComponents() {
 		// Top panel for search fields (combo + realtime text)
 		JPanel top = new JPanel(new BorderLayout(6, 6));
 		top.setBackground(Theme.BACKGROUND_COLOR);
 		JPanel searchType = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		searchType.setBackground(Theme.BACKGROUND_COLOR);
-		cmbType = new JComboBox<>(new String[]{"Título", "Género"});
+		cmbType = new JComboBox<>(new String[]{"Title", "Genre"});
 		txtSearch = new JTextField();
 		txtSearch.setBorder(BorderFactory.createEmptyBorder(6, 6, 6, 6));
-		JLabel lbl = new JLabel("Buscar videojuego:");
+		JLabel lbl = new JLabel("Look by videogame:");
 		lbl.setForeground(Theme.TEXTFIELD_TEXT_COLOR);
 		searchType.add(lbl);
 		searchType.add(cmbType);
@@ -39,7 +43,7 @@ public class LookForGameWindow extends JPanel {
 		add(top, BorderLayout.NORTH);
 
 		// Table for results
-		String[] columns = {"Título", "Género", "Precio", "Puntaje"};
+		String[] columns = {"Title", "Genre", "Price", "Score"};
 		tableModel = new DefaultTableModel(columns, 0) {
 			@Override
 			public boolean isCellEditable(int row, int column) {
@@ -53,9 +57,9 @@ public class LookForGameWindow extends JPanel {
 		// Bottom actions (edit price / score)
 		JPanel bottom = new JPanel(new FlowLayout(FlowLayout.CENTER));
 		bottom.setBackground(Theme.BACKGROUND_COLOR);
-		btnEditPrice = new JButton("Editar precio");
+		btnEditPrice = new JButton("Edit price");
 		btnEditPrice.setEnabled(false);
-		btnEditScore = new JButton("Editar puntaje");
+		btnEditScore = new JButton("Edit score");
 		btnEditScore.setEnabled(false);
 		btnEditPrice.setBackground(Theme.BUTTON_COLOR);
 		btnEditPrice.setForeground(Theme.BUTTON_TEXT_COLOR);
@@ -68,7 +72,9 @@ public class LookForGameWindow extends JPanel {
 		add(bottom, BorderLayout.SOUTH);
 
 		Theme.applyFontOnFrame(this, Font.PLAIN, 16f);
+	}
 
+	private void initEvents() {
 		// Real-time search on typing
 		txtSearch.getDocument().addDocumentListener(new javax.swing.event.DocumentListener() {
 			public void insertUpdate(javax.swing.event.DocumentEvent e) { performSearch(); }
@@ -90,7 +96,7 @@ public class LookForGameWindow extends JPanel {
 			String title = tableModel.getValueAt(row, 0).toString();
 			Videogame g = Store.lookGameByTitle(title);
 			if (g == null) return;
-			String in = JOptionPane.showInputDialog(SwingUtilities.getWindowAncestor(LookForGameWindow.this), "Nuevo precio ($COP):", String.valueOf(g.getPrice()));
+			String in = JOptionPane.showInputDialog(SwingUtilities.getWindowAncestor(LookForGameWindow.this), "New Price ($COP):", String.valueOf(g.getPrice()));
 			if (in == null) return;
 			in = in.trim();
 			try {
@@ -99,7 +105,7 @@ public class LookForGameWindow extends JPanel {
 				g.setPrice(p);
 				performSearch();
 			} catch (NumberFormatException ex) {
-				JOptionPane.showMessageDialog(SwingUtilities.getWindowAncestor(LookForGameWindow.this), "Precio inválido. Introduce un número válido mayor o igual a 0.", "Error", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(SwingUtilities.getWindowAncestor(LookForGameWindow.this), "Invalid Price. It must be more than zero.", "Error", JOptionPane.ERROR_MESSAGE);
 			}
 		});
 
@@ -110,7 +116,7 @@ public class LookForGameWindow extends JPanel {
 			Videogame g = Store.lookGameByTitle(title);
 			if (g == null) return;
 			String current = g.getScore() > 0 ? String.valueOf(g.getScore()) : "";
-			String in = JOptionPane.showInputDialog(SwingUtilities.getWindowAncestor(LookForGameWindow.this), "Nuevo puntaje (0-5):", current);
+			String in = JOptionPane.showInputDialog(SwingUtilities.getWindowAncestor(LookForGameWindow.this), "New score (0-5):", current);
 			if (in == null) return;
 			in = in.trim();
 			try {
@@ -119,7 +125,7 @@ public class LookForGameWindow extends JPanel {
 				g.setScore(s);
 				performSearch();
 			} catch (NumberFormatException ex) {
-				JOptionPane.showMessageDialog(SwingUtilities.getWindowAncestor(LookForGameWindow.this), "Puntaje inválido. Introduce un entero entre 0 y 5.", "Error", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(SwingUtilities.getWindowAncestor(LookForGameWindow.this), "Invalid score. It must be between 0 and 5.", "Error", JOptionPane.ERROR_MESSAGE);
 			}
 		});
 	}
@@ -135,10 +141,10 @@ public class LookForGameWindow extends JPanel {
 			return;
 		}
 
-		if ("Título".equalsIgnoreCase(type)) {
+		if ("Title".equalsIgnoreCase(type)) {
 			results = Store.lookGamesByTitle(f);
-		} else if ("Género".equalsIgnoreCase(type)) {
-			results = Store.lookGameByGenre(f);
+		} else if ("Genre".equalsIgnoreCase(type)) {
+			results = Store.lookGamesByGenre(f);
 		} else {
             results = Store.getVideoGames();
         }

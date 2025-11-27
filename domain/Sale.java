@@ -62,8 +62,4 @@ public class Sale implements Serializable {
     public int getId() {
         return id;
     }
-
-    public String toString() {
-        return String.valueOf(id);
-    }
 }

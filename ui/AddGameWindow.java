@@ -37,7 +37,7 @@ public class AddGameWindow extends JPanel {
 		c.insets = new Insets(8,8,8,8);
 		c.fill = GridBagConstraints.HORIZONTAL;
 
-		JLabel lblTitle = new JLabel("Título:");
+		JLabel lblTitle = new JLabel("Title:");
 		lblTitle.setForeground(Theme.TEXTFIELD_TEXT_COLOR);
 		c.gridx = 0; c.gridy = 0; c.weightx = 0.2;
 		form.add(lblTitle, c);
@@ -48,7 +48,7 @@ public class AddGameWindow extends JPanel {
 		c.gridx = 1; c.gridy = 0; c.weightx = 0.8;
 		form.add(txtTitle, c);
 
-		JLabel lblGenre = new JLabel("Género:");
+		JLabel lblGenre = new JLabel("Genre:");
 		lblGenre.setForeground(Theme.TEXTFIELD_TEXT_COLOR);
 		c.gridx = 0; c.gridy = 1; c.weightx = 0.2;
 		form.add(lblGenre, c);
@@ -59,7 +59,7 @@ public class AddGameWindow extends JPanel {
 		c.gridx = 1; c.gridy = 1; c.weightx = 0.8;
 		form.add(txtGenre, c);
 
-		JLabel lblPrice = new JLabel("Precio:");
+		JLabel lblPrice = new JLabel("Price:");
 		lblPrice.setForeground(Theme.TEXTFIELD_TEXT_COLOR);
 		c.gridx = 0; c.gridy = 2; c.weightx = 0.2;
 		form.add(lblPrice, c);
@@ -70,7 +70,7 @@ public class AddGameWindow extends JPanel {
 		c.gridx = 1; c.gridy = 2; c.weightx = 0.8;
 		form.add(txtPrice, c);
 
-		JLabel lblScore = new JLabel("Puntaje (opcional 0-5):");
+		JLabel lblScore = new JLabel("Score (optional 0-5):");
 		lblScore.setForeground(Theme.TEXTFIELD_TEXT_COLOR);
 		c.gridx = 0; c.gridy = 3; c.weightx = 0.2;
 		form.add(lblScore, c);
@@ -123,7 +123,7 @@ public class AddGameWindow extends JPanel {
 					price = Float.parseFloat(priceStr);
 					if (price < 0) throw new NumberFormatException();
 				} catch (NumberFormatException ex) {
-					JOptionPane.showMessageDialog(AddGameWindow.this, "Precio inválido.", "Error", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(AddGameWindow.this, "Invalid price.", "Error", JOptionPane.ERROR_MESSAGE);
 					return;
 				}
 
@@ -137,13 +137,13 @@ public class AddGameWindow extends JPanel {
 						score = Integer.parseInt(scoreStr);
 						if (score < 0 || score > 5) throw new NumberFormatException();
 					} catch (NumberFormatException ex) {
-						JOptionPane.showMessageDialog(AddGameWindow.this, "Puntaje inválido. Debe ser entero entre 0 y 5.", "Error", JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showMessageDialog(AddGameWindow.this, "Invalid score. It must be between 0 and 5", "Error", JOptionPane.ERROR_MESSAGE);
 						return;
 					}
 					new Videogame(title, genre, score, price);
 				}
 
-				JOptionPane.showMessageDialog(SwingUtilities.getWindowAncestor(AddGameWindow.this), "Videojuego agregado al inventario.", "OK", JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane.showMessageDialog(SwingUtilities.getWindowAncestor(AddGameWindow.this), "Videogame added to store", "OK", JOptionPane.INFORMATION_MESSAGE);
 				// clear form so user can add more if embedded; do not close parent
 				clearFields();
 			}

@@ -39,7 +39,7 @@ public class LookForClientWindow extends JPanel {
 		cmbType = new JComboBox<>(new String[]{"ID","Name"});
 		txtSearch = new JTextField();
 		txtSearch.setBorder(BorderFactory.createEmptyBorder(6,6,6,6));
-		JLabel lbl = new JLabel("Buscar cliente:");
+		JLabel lbl = new JLabel("Look for client:");
 		lbl.setForeground(Theme.TEXTFIELD_TEXT_COLOR);
 		searchType.add(lbl);
 		searchType.add(cmbType);
@@ -65,11 +65,11 @@ public class LookForClientWindow extends JPanel {
 
 		JPanel bottom = new JPanel(new FlowLayout(FlowLayout.CENTER));
 		bottom.setBackground(Theme.BACKGROUND_COLOR);
-		btnEditName = new JButton("Editar nombre");
+		btnEditName = new JButton("Edit name");
 		btnEditName.setEnabled(false);
-		btnMakeSale = new JButton("Realizar venta");
+		btnMakeSale = new JButton("Sell");
 		btnMakeSale.setEnabled(false);
-			btnAddCustomer = new JButton("Agregar cliente");
+			btnAddCustomer = new JButton("Add client");
 			btnAddCustomer.setBackground(Theme.BUTTON_COLOR);
 			btnAddCustomer.setForeground(Theme.BUTTON_TEXT_COLOR);
 			btnAddCustomer.setFocusPainted(false);
@@ -142,7 +142,7 @@ public class LookForClientWindow extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				String name = txtSearch.getText() == null ? "" : txtSearch.getText().trim();
 				if (name.isEmpty()) {
-					name = JOptionPane.showInputDialog(SwingUtilities.getWindowAncestor(LookForClientWindow.this), "Nombre del cliente:");
+					name = JOptionPane.showInputDialog(SwingUtilities.getWindowAncestor(LookForClientWindow.this), "Client's name:");
 					if (name == null) return; // user cancelled
 					name = name.trim();
 					if (name.isEmpty()) return;

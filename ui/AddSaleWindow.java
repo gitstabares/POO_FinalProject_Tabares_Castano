@@ -40,7 +40,7 @@ public class AddSaleWindow extends JPanel {
 		initEvents();
 		// Show customer label at top
 		if (customer != null) {
-			JLabel info = new JLabel("Cliente: " + customer.getName() + " (" + customer.getId() + ")");
+			JLabel info = new JLabel("Client: " + customer.getName() + " (" + customer.getId() + ")");
 			info.setForeground(Theme.TEXTFIELD_TEXT_COLOR);
 			add(info, BorderLayout.SOUTH);
 		}
@@ -55,7 +55,7 @@ public class AddSaleWindow extends JPanel {
 		// Top search
 		JPanel top = new JPanel(new BorderLayout(6,6));
 		top.setBackground(Theme.BACKGROUND_COLOR);
-		JLabel lbl = new JLabel("Buscar videojuego por título:");
+		JLabel lbl = new JLabel("Look game by title:");
 		lbl.setForeground(Theme.TEXTFIELD_TEXT_COLOR);
 		txtSearch = new JTextField();
 		txtSearch.setBorder(BorderFactory.createEmptyBorder(6,6,6,6));
@@ -91,7 +91,7 @@ public class AddSaleWindow extends JPanel {
 		// Buttons for inventory
 		JPanel invBtns = new JPanel(new FlowLayout(FlowLayout.CENTER));
 		invBtns.setBackground(Theme.BACKGROUND_COLOR);
-		btnAddToCart = new JButton("Añadir al carrito");
+		btnAddToCart = new JButton("Add to shopping cart");
 		btnAddToCart.setEnabled(false);
 		btnAddToCart.setBackground(Theme.BUTTON_COLOR);
 		btnAddToCart.setForeground(Theme.BUTTON_TEXT_COLOR);
@@ -102,7 +102,7 @@ public class AddSaleWindow extends JPanel {
 		// Cart panel
 		JPanel cartPanel = new JPanel(new BorderLayout(6,6));
 		cartPanel.setBackground(Theme.BACKGROUND_COLOR);
-		cartPanel.setBorder(BorderFactory.createTitledBorder("Carrito"));
+		cartPanel.setBorder(BorderFactory.createTitledBorder("Shopping cart"));
 
 		cartModel = new DefaultListModel<>();
 		lstCart = new JList<>(cartModel);
@@ -122,11 +122,11 @@ public class AddSaleWindow extends JPanel {
 
 		JPanel cartBtns = new JPanel(new FlowLayout(FlowLayout.CENTER));
 		cartBtns.setBackground(Theme.BACKGROUND_COLOR);
-		btnRemoveFromCart = new JButton("Quitar");
+		btnRemoveFromCart = new JButton("Remove");
 		btnRemoveFromCart.setEnabled(false);
 		btnRemoveFromCart.setBackground(Theme.BUTTON_COLOR);
 		btnRemoveFromCart.setForeground(Theme.BUTTON_TEXT_COLOR);
-		btnSell = new JButton("Vender");
+		btnSell = new JButton("Sell");
 		btnSell.setEnabled(false);
 		btnSell.setBackground(new Color(80,130,70));
 		btnSell.setForeground(Theme.BUTTON_TEXT_COLOR);
@@ -198,7 +198,7 @@ public class AddSaleWindow extends JPanel {
 				} else {
 					sale = new Sale(purchase);
 				}
-				JOptionPane.showMessageDialog(SwingUtilities.getWindowAncestor(AddSaleWindow.this), "Venta realizada. Total: $" + sale.getCost(), "Venta", JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane.showMessageDialog(SwingUtilities.getWindowAncestor(AddSaleWindow.this), "Sale Performed. Total cost: $" + sale.getCost(), "Sale", JOptionPane.INFORMATION_MESSAGE);
 				cartModel.clear();
 				btnSell.setEnabled(false);
 			}
@@ -207,7 +207,7 @@ public class AddSaleWindow extends JPanel {
 
 	// Allow returning from a customer-specific sale view
 	public void setReturnAction(Runnable r) {
-		JButton btnReturn = new JButton("Regresar");
+		JButton btnReturn = new JButton("Return");
 		btnReturn.setBackground(Theme.BUTTON_COLOR);
 		btnReturn.setForeground(Theme.BUTTON_TEXT_COLOR);
 		btnReturn.setFocusPainted(false);
@@ -227,17 +227,5 @@ public class AddSaleWindow extends JPanel {
 				invModel.addElement(g);
 			}
 		}
-	}
-
-	// Optional standalone test
-	public static void main(String[] args) {
-		SwingUtilities.invokeLater(() -> {
-			JFrame f = new JFrame("Realizar venta");
-			f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-			f.setContentPane(new AddSaleWindow());
-			f.setSize(700,400);
-			f.setLocationRelativeTo(null);
-			f.setVisible(true);
-		});
 	}
 }
